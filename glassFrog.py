@@ -39,8 +39,15 @@ urls = []
 
 def glassFrog():
 	try:
+		print(iBan + ' Enter ' + bc.GC + 'multi' + bc.BC + ' for multiple Keyword search')
 		print(iBan + ' Enter ' + bc.GC + 'custom' + bc.BC + ' for custom URL file')
 		base_url = str(input(bc.BC + ' Enter Base URL: ' + bc.GC))
+		if(base_url == 'multi'):
+			multi = base_url.title() + ' Keyword'
+			from modules.multiKeyword import multiKeyword
+			os.system('clear')
+			print(banner)
+			multiKeyword(multi)
 	except KeyboardInterrupt:
 		os.system('clear')
 		print(banner)
