@@ -2,7 +2,7 @@
 Link Crawling Keyword Search Tool  
   
 # How it works?  
-GlassFrog requires the user to set a Base_URL which it uses to collect all links existing on the Base_URL's webpage. It will check each links webpage for the keyword & print the link if it exists within the pages content. Should you choose to 'extend' the search, it will continue to collect all other links from sub-link webpages & also search for the keyword in their pages content.  
+GlassFrog takes a Base_URL which it uses to collect all links existing on the Base_URL's webpage. It will collect & check each links webpage for the keyword & return the result if it exists within the pages content. Should you choose to 'extend' the search, it will continue to collect all other links from sub-link webpages & also search for the keyword in their pages content as well.  
   
 # Usage  
   
