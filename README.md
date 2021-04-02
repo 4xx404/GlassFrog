@@ -7,7 +7,7 @@ GlassFrog requires the user to set a Base_URL which it uses to collect all links
 # Usage  
   
 ```
-git clone https://github.com/4xx404/GlassFrog && cd GlassFrog
+git clone https://github.com/4xx404/Glass-Frog && cd GlassFrog
 python3 -m pip install -r requirements.txt
 python3 glassFrog.py
 ```
