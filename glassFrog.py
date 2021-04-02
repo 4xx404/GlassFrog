@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import sys, os, time, datetime
-import socket
 import requests
 from bs4 import BeautifulSoup
 
