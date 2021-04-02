@@ -31,7 +31,7 @@ os.system('clear')
 print(banner)
 
 def customFile(custom, keyWord):
-	print(bc.BC + ' Base URL: ' + bc.GC + custom)
+	print(bc.BC + ' Search Type: ' + bc.GC + custom)
 	print(bc.BC + ' Keyword: ' + bc.GC + keyWord + '\n')
 
 	try:
