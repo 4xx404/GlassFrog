@@ -67,16 +67,20 @@ def extender(base_url, keyWord):
 					else:
 						link = bURL + link
 				elif(link.startswith('#')):
-					continue
+					link = ''
+					#continue
 				else:
 					link = bURL + link
 
-				if(link != bURL):
-					if(link not in duplicates):
-						hrefs.append(link)
-						#x.write(link + '\n')
-						duplicates.append(link)
-						checkedLinks += 1
+				if(link != ''):
+					if(link != bURL):
+						if(link not in duplicates):
+							hrefs.append(link)
+							#x.write(link + '\n')
+							duplicates.append(link)
+							checkedLinks += 1
+						else:
+							continue
 					else:
 						continue
 				else:
