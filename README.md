@@ -12,5 +12,11 @@ python3 -m pip install -r requirements.txt
 python3 glassFrog.py
 ```
   
+# Modes
+* Single Keyword Search
+* Multiple Keyword Search
+* Use Custom URL Files
+* Base URL Search or extend onto External Links found
+  
 # Uses  
 GlassFrog can find a lot of useful information such as various types of contact information, usernames, hidden directories, friends/associates etc. The search is a dynamic search dependent solely upon the links it is able to collect, meaning there is no 'average' search time nor length of results. Searches can vary from minutes to hours.  
