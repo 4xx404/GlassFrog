@@ -39,16 +39,34 @@ urls = []
 
 def glassFrog():
 	try:
+		print(iBan + ' Enter ' + bc.GC + 'custom' + bc.BC + ' for custom URL file')
 		base_url = str(input(bc.BC + ' Enter Base URL: ' + bc.GC))
-		keyWord = str(input(bc.BC + ' Enter Keyword: ' + bc.GC))
 	except KeyboardInterrupt:
 		os.system('clear')
 		print(banner)
-		print(bc.BC + ' Closing glassFrog...')
+		print(bc.BC + ' Closing GlassFrog...')
 		time.sleep(1)
 		os.system('clear')
 		print(banner)
 		quit()
+
+	try:
+		keyWord = str(input(bc.BC + ' Enter Keyword: ' + bc.GC))
+	except KeyboardInterrupt:
+		os.system('clear')
+		print(banner)
+		print(bc.BC + ' Closing GlassFrog...')
+		time.sleep(1)
+		os.system('clear')
+		print(banner)
+		quit()
+		
+	if(base_url == 'custom'):
+		custom = base_url + ' file'
+		from modules.customFile import customFile
+		os.system('clear')
+		print(banner)
+		customFile(custom, keyWord)
 
 	if(base_url == ''):
 		os.system('clear')
