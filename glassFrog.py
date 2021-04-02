@@ -62,7 +62,7 @@ def glassFrog():
 		quit()
 		
 	if(base_url == 'custom'):
-		custom = base_url + ' file'
+		custom = base_url.title() + ' File'
 		from modules.customFile import customFile
 		os.system('clear')
 		print(banner)
