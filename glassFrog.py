@@ -59,6 +59,7 @@ def glassFrog():
 
 	try:
 		keyWord = str(input(bc.BC + ' Enter Keyword: ' + bc.GC))
+		keyWord = ' ' + str(keyWord) + ' '
 	except KeyboardInterrupt:
 		os.system('clear')
 		print(banner)
@@ -98,11 +99,12 @@ def glassFrog():
 	print(banner)
 
 	try:
+		print(bc.BC + ' Search Type: ' + bc.GC + 'Single Keyword')
+		print(bc.BC + ' Base URL: ' + bc.GC + base_url)
+		print(bc.BC + ' Keyword: ' + bc.GC + keyWord.replace(' ', '') + '\n')
+		time.sleep(1)
 		pageres = requests.get(base_url, headers=headers)
 		soup = BeautifulSoup(pageres.content, 'html.parser')
-		print(bc.BC + ' Base URL: ' + bc.GC + base_url)
-		print(bc.BC + ' Searching for Keyword: ' + bc.GC + keyWord + '\n')
-		time.sleep(1)
 	except Exception:
 		os.system('clear')
 		print(banner)
@@ -113,7 +115,7 @@ def glassFrog():
 	duplicates = []
 	hrefs = []
 
-	x = open('modules/data/externalLinks.txt', 'w+')
+	x = open('links/externalLinks.txt', 'w+')
 	checkedLinks = 0
 	for l in soup.find_all("a", href=True):
 		link = l['href'].replace('\n','')
@@ -168,17 +170,27 @@ def glassFrog():
 	time.sleep(1)
 	os.system('clear')
 	print(banner)
+	print(sBan + ' Search Type: ' + bc.GC + 'Single Keyword')
 	print(sBan + ' Base URL: ' + bc.GC + base_url)
-	print(sBan + ' Keyword: ' + bc.GC + keyWord)
-	print(sBan + ' Keyword Found: ' + bc.GC + str(keyWordsCount))
+	print(sBan + ' Keyword: ' + bc.GC + keyWord.replace(' ', ''))
+	print(sBan + ' Total Keyword Found: ' + bc.GC + str(keyWordsCount))
 	print(sBan + ' Links Checked: ' + bc.GC + str(checkedLinks))
 
-	print(bc.BC + '\n "' + bc.GC + keyWord.title() + bc.BC + '" Found on Pages: ')
+	print(bc.BC + '\n "' + bc.GC + keyWord.replace(' ', '').title() + bc.BC + '" Found on Pages: ')
+	x = open('collected-data/search-output.txt', 'w+')
 	for f in keyWordsFound:
 		print('\t' + sBan + ' ' + bc.GC + f)
-	
+		x.write(f + '\n')
+	x.close()
+
 	extendBanner = bc.BC + '\n Extend to External Links[' + bc.GC + 'y' + bc.BC + '/' + bc.GC + 'n' + bc.BC + ']: '
-	extend = str(input(extendBanner + bc.GC)).lower()
+	try:
+		extend = str(input(extendBanner + bc.GC)).lower()
+	except KeyboardInterrupt:
+		print(bc.BC + '\n Closing GlassFrog...')
+		time.sleep(1)
+		quit()
+
 	if(extend == 'y'):
 		from modules.extender import extender
 		os.system('clear')
