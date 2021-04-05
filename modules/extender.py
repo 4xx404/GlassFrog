@@ -85,7 +85,7 @@ def extender(base_url, keyWord):
 							if(link not in links):
 								hrefs.append(link)
 								duplicates.append(link)
-								x.write(link)
+								x.write(link + '\n')
 								checkedLinks += 1
 							else:
 								continue
