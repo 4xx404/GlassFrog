@@ -20,7 +20,7 @@ python3 glassFrog.py
 ```
   
 # Quickly view the whole database
-For Ease of Accessibility to the data collected, I have added a web interface which displays both tables. Everything is built into the server so you just need to open the ngrok link you are given.  
+For Ease of Accessibility to the data collected, I have added a web interface which displays both tables. Everything is built into the server so you just need to open the ngrok link you are given. TIP: If your database is large, use CTRL + F in the browser to find something quickly.  
 ```
 python3 server.py
 ```
