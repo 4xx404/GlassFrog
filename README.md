@@ -20,8 +20,8 @@ python3 glassFrog.py
 ```
 
 # Output Digest
-If the current line of output is [✓] <Branch URL> in GREEN then keyword has been found, otherwise it will show [✕] <Branch URL> in RED (Not Found).  
-Other data types will be displayed as, for example, [✓] EMAIL: <Email Address>
+If the current line of output is [✓] Branch URL in GREEN then keyword has been found, otherwise it will show [✕] Branch URL in RED (Not Found).  
+Other data types will be displayed as, for example, [✓] EMAIL: Email Address
   
 # Quickly view the whole database
 For Ease of Accessibility to the data collected, I have added a web interface which displays both tables. Everything is built into the server so you just need to open the ngrok link you are given. TIP: If your database is large, use CTRL + F in the browser to find something quickly.  
