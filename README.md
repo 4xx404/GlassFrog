@@ -29,11 +29,13 @@ For Ease of Accessibility to the data collected, I have added a web interface wh
 python3 server.py
 ```
   
-# Modes (All will find data types automatically)
+# Modes (All will find data types automatically)  
+Version 1, which includes all modes without data recognition, can be found at https://github.com/Ns0ciety/
 * Single Keyword Search
 * Multiple Keyword Search (This hasn't yet been built for v2. but will be)
 * Use Custom URL Files (This hasn't yet been built for v2, but will be)
 * Base URL Search or Extended onto External Links found (Extended hasn't yet been built for v2, but will be)
+
   
 # Uses  
 GlassFrog can be used to find a lot of useful information such as various types of contact information, usernames, hidden directories, friends/associates etc. The search is a dynamic search dependent solely upon the links it is able to collect. For example, a large site will yield a lot more results than a small site as the link collection would collect more pages.  
