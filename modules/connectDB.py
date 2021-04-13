@@ -28,8 +28,7 @@ banner = bc.RC + '''
 
 class database:
 	def __init__(self):
-		self.dbFile = '/var/www/html/GlassFrog-UI/db/glassFrog.db'
-		self.db = sqlite3.connect(self.dbFile)
+		self.db = sqlite3.connect('/var/www/html/GlassFrog-UI/db/glassFrog.db')
 
 	def createTables(self):
 		try:
