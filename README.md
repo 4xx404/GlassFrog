@@ -20,9 +20,9 @@ python3 glassFrog.py
 ```
   
 # Quickly view the whole database
+For Ease of Accessibility to the data collected, I have added a web interface which displays both tables. Everything is built into the server so you just need to open the ngrok link you are given.  
 ```
 python3 server.py
-navigate to the link the server gives you
 ```
   
 # Modes (All will find data types automatically)
