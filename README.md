@@ -30,7 +30,7 @@ python3 server.py
 ```
   
 # Modes (All will find data types automatically)  
-Version 1, which includes all modes without data recognition, can be found at https://github.com/Ns0ciety/
+Version 1, which includes all modes without data recognition, can be found at https://github.com/Ns0ciety/Glass-Frog
 * Single Keyword Search
 * Multiple Keyword Search (This hasn't yet been built for v2. but will be)
 * Use Custom URL Files (This hasn't yet been built for v2, but will be)
