@@ -2,7 +2,7 @@
 Link Crawling Keyword Search & Information Gathering Tool  
   
 # How it works?  
-GlassFrog takes a Base_URL which it uses to collect all existing links on the Base_URL's webpage. While collecting links, it will check each link for the keyword & if exists will return a result. This is the 2nd version of GlassFrog, where the first version relied on luck for gathering information such as emails or usernames, this version looks for different data types based on patterns in strings.  
+GlassFrog takes a Base_URL which it uses to collect all existing links on the Base_URL's webpage. While collecting links, it will check each link for the keyword & if exists will return a result. This is the 2nd version of GlassFrog, where the first version relied on luck for gathering information such as emails or usernames, this version looks for different data types based on patterns in strings. GlassFrog will shift through various html tag types searching for information.  
 
 # Data Types it can find
 * Usernames/Handles (Such as twitter handles @username) [Accurate]
