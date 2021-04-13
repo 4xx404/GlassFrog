@@ -90,7 +90,7 @@ def glassFrog():
 			if(extend == 'y'):
 				os.system('clear')
 				print(banner)
-				print(eBan + ' [' +bc.GC + ' * * * ' + bc.BC + '] EXTENDER COMING SOON! [' + bc.GC + ' * * * ' + bc.BC + ']')
+				print(eBan + ' [' +bc.GC + ' * * * ' + bc.BC + '] EXTENDER COMING SOON! [' + bc.GC + ' * * * ' + bc.BC + ']\n')
 				time.sleep(1)
 				glassFrog()
 			else:
