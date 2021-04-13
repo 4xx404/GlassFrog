@@ -8,7 +8,7 @@ GlassFrog takes a Base_URL which it uses to collect all existing links on the Ba
 * Usernames/Handles (Such as twitter handles @username) [Accurate]
 * Email Addresses (Based on the base URL, it will find the Free Layer Domain & add it to a list(This helps to find business emails)) [Accurate]
 * Other Domains that are in text format, rather than in a link [Accurate]
-* Phone Numbers (This is a little tricky as each website can format their numbers slightly different) [Works Sometimes]
+* Phone Numbers (This is a little tricky as each website can format their numbers slightly different. Alternatively it looks for 'tel:' type links) [Works Sometimes]
 * Bitcoin Addresses [Accurate]
   
 # Usage  
