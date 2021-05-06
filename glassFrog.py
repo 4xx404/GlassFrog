@@ -65,7 +65,7 @@ def glassFrog():
 			else:
 				base_url = base_url + '/'
 
-			if(base_url.startswith('https://') or base_url.startswith('https://')):
+			if(base_url.startswith('http://') or base_url.startswith('https://')):
 				setBranches = ['' , '', '']
 				branch = collector()
 				branch.addBranches(base_url, keyword)
