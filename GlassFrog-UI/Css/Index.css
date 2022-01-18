@@ -1,0 +1,45 @@
+@import "Colors.css";
+
+.index-content-container {
+    float: left;
+	position: relative;
+	margin: 0 auto;
+    margin-left: 1.25%;
+	width: 97%;
+	height: 52.5rem;
+	border: none;
+	overflow: auto;
+	overflow-y: none;
+	display: flex;
+	justify-content: space-between;
+}
+
+.index-badge-counter {
+	float: left;
+	position: relative;
+	margin: 0 auto;
+	margin-top: 2.5rem;
+	width: 25%;
+	height: 5rem;
+	border-radius: 3.75rem;
+	background: none;
+	color: var(--white);
+	text-align: center;
+	text-decoration: none;
+	font-size: 2rem;
+	font-weight: bold;
+	padding-top: 1.25rem;
+	padding-bottom: 1.25rem;
+	user-select: none;
+}
+
+.index-badge-counter-number {
+	color: var(--green);
+	margin-left: 2.5%;
+	padding: 0.25rem;
+	background-color: var(--red);
+	border: 1%;
+	border-style: solid;
+	border-color: var(--red);
+	border-radius: 50%;
+}
