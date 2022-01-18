@@ -1,66 +1,62 @@
-import os, sys, time
-from pyngrok import ngrok
-import subprocess
+#!/usr/bin/python3
+import subprocess, sys
+sys.dont_write_bytecode = True
 
-class bc:
-	GC = '\033[1;39m'
-	BC = '\033[1;34m'
-	RC = '\033[1;31m'
+from Core.Styling.Banners import sd
+from Core.Styling.Colors import bc
 
-iBan = bc.BC + " [" + bc.GC + "?" + bc.BC + "]"
-sBan = bc.BC + " [" + bc.GC + u'\u2713' + bc.BC + "]"
-eBan = bc.BC + " [" + bc.RC + u'\u2717' + bc.BC + "]"
+from Core.Config import CoreConfig
+from Core.Commands import Command
 
-author = bc.BC + "\n Author: " + bc.RC + "4" + bc.GC + "x" + bc.BC + "x" + bc.RC + "4" + bc.GC + "0" + bc.BC + "4\n"
-version = bc.BC + " Version: " + bc.RC + "2" + bc.GC + "." + bc.BC + "0\n"
-github = bc.BC + " Github: " + bc.RC + "h" + bc.GC + "t" + bc.BC + "t" + bc.RC + "p" + bc.GC + "s" + bc.BC + ":" + bc.RC + "/" + bc.GC + "/" + bc.BC + "g" + bc.RC + "i" + bc.GC + "t" + bc.BC + "h" + bc.RC + "u" + bc.GC + "b" + bc.BC + "." + bc.RC + "c" + bc.GC + "o" + bc.BC + "m" + bc.RC + "/" + bc.GC + "4" + bc.BC + "x" + bc.RC + "x" + bc.GC + "4" + bc.BC + "0" + bc.RC + "4\n"
+class GlassFrogServer:
+	def __init__(self):
+		self.Config = CoreConfig()
+		self.Cmd = Command()
 
-banner = bc.RC + '''
-''' + bc.GC + '''   ___  __      __    ___  ___  ____  ____  _____  ___     _   _   
-''' + bc.BC + '''  / __)(  )    /__\  / __)/ __)( ___)(  _ \(  _  )/ __)   (.)_(.)  
-''' + bc.RC + ''' ( (_-. )(__  /(__)\ \__ \\\__ \ )__)  )   / )(_)(( (_-.  (   _   ) 
-''' + bc.GC + '''  \___/(____)(__)(__)(___/(___/(__)  (_)\_)(_____)\___/  /`-----'\ 
-''' + author + version + github
+	def ThrowError(self, ErrorType: str, ErrorData: str or list = None):
+		self.ErrorType: str = ErrorType.lower()
+		self.ErrorData: str = ErrorData
 
-os.system('clear')
-print(banner)
+		self.DefinedErrors = [
+			"server_connect_failed",
+			"change_directory_failed",
+		]
 
-def runServer():
-	print(bc.BC + " Starting Ngrok HTTP Tunnel...")
-	try:
-		http_tunnel = ngrok.connect()
-		time.sleep(1)
-		if http_tunnel:
-			serverStatus = sBan + ' Ngrok Tunnel: ' + bc.GC + 'Connected'
+		if(self.ErrorType in self.DefinedErrors):
+			if(self.ErrorType == "server_connect_failed"):
+				return f"{sd.eBan} Failed to connect to the {bc.RC}{self.ErrorData}{bc.BC} server"
+			elif(self.ErrorType == "change_directory_failed"):
+				return f"\n{sd.eBan} Failed to change directory to {bc.RC}{self.ErrorData}{bc.BC}"
+			else:
+				return f"{sd.eBan} Error Type {bc.RC}{self.ErrorType}{bc.BC} thrown without an error message defined"
 		else:
-			serverStatus = eBan + ' Ngrok Tunnel: ' + bc.RC + 'Disconnected'
-		
-		os.system('clear')
-		print(banner)
-		print(serverStatus)
-		glassFrogURL = str(http_tunnel).replace('"', '').replace('NgrokTunnel: ', '').replace(' -> http://localhost:80', '').replace('http', 'https') + "/GlassFrog-UI/glassFrog.php"
-		time.sleep(0.5)
-		print(bc.BC + ' Interface URL: ' + bc.GC + glassFrogURL)
-		ngrok_process = ngrok.get_ngrok_process()
-		print(bc.BC + "\n" + iBan + bc.GC + " CTRL + C" + bc.BC + " to stop the server\n")
-		os.chdir('/var/www/html/')
-		subprocess.call(['php', '-S', 'localhost:80'])
-		ngrok_process.proc.wait()
-	except KeyboardInterrupt:
-		os.system('clear')
-		print(banner)
-		print(bc.BC + " Closing PHP Web Server...")
-		time.sleep(0.5)
-		print(bc.BC + " Closing Ngrok HTTP Tunnel...")
-		ngrok.disconnect(http_tunnel.public_url)
-		time.sleep(0.5)
-		print(bc.BC + " Killing Ngrok process...")
-		time.sleep(0.5)
-		ngrok.kill()
-		time.sleep(0.5)
-		os.system('clear')
-		print(banner)
-		quit()
+			return f"{sd.eBan} Undefined Error Type {bc.RC}{self.ErrorType}{bc.BC}"
 
-if __name__ == '__main__':
-	runServer()
+	def CreateProcess(self):
+		print(f"\n{sd.iBan} Press {bc.GC}CTRL + C{bc.BC} to stop the server\n")
+		if(self.Cmd.ChangeDirectory(self.Config.WebServerPath)):
+			try:
+				subprocess.call(["php", "-S", f"{self.Config.ServerHost}:{self.Config.ServerPort}"])
+			except Exception:
+				self.Cmd.Clear()
+				print(self.ThrowError("server_connect_failed", self.Config.AppName))
+				quit()
+		else:
+			self.Cmd.Clear()
+			print(self.ThrowError("change_directory_failed", self.Config.WebServerPath))
+			quit()
+
+if(__name__ == '__main__'):
+	def Initiate():
+		Server = GlassFrogServer()
+
+		try:
+			print(f"{bc.BC} Interface URL: {bc.GC}{CoreConfig().ServerLink}{bc.BC}")
+			Server.CreateProcess()
+		except KeyboardInterrupt:
+			Command().Clear()
+			print(f"{sd.sBan} Server Stopped")
+			quit()
+
+	Command().Clear()
+	Initiate()
