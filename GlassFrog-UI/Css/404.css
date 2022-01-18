@@ -1,0 +1,25 @@
+.content-404-container {
+    float: left;
+	position: relative;
+	margin: 0 auto;
+    margin-left: 1.25%;
+	width: 97%;
+	height: 52.5rem;
+	border: 1%;
+	border-style: solid;
+	border-color: #333333;
+	overflow: auto;
+	overflow-y: none;
+}
+
+.message-404-container {
+    float: left;
+    position: relative;
+    margin: 0 auto;
+    margin-left: 25%;
+    width: 50%;
+    height: auto;
+    border: none;
+    color: #FF0000;
+    text-align: center;
+}

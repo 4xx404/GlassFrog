@@ -1,0 +1,22 @@
+.branch-data-content {
+	float: left;
+	position: relative;
+	margin: 0 auto;
+	width: 84.5%;
+	height: 52.5rem;
+	border: 1%;
+	border-style: solid;
+	border-color: #333333;
+	overflow: auto;
+	overflow-y: none;
+}
+
+.branch-data-table-link {
+	color: var(--white);
+	text-decoration: none;
+}
+
+.no-results-header {
+	color: red;
+	text-align: center;
+}

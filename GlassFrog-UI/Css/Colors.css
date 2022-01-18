@@ -1,0 +1,10 @@
+:root {
+	--black: #000000;
+	--red: #ff0000;
+	--blue: #00ddff;
+	--green: #00ff5e;
+	--white: #ffffff;
+	--dark-gray: #333333;
+
+    --white-red-glow: 0 0 8px var(--red), 0 0 4px var(--white);
+}

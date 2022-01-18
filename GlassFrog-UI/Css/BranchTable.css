@@ -1,0 +1,24 @@
+@import "Colors.css";
+
+.branch-content {
+	float: left;
+	position: relative;
+	margin: 0 auto;
+	width: 84.5%;
+	height: 52.5rem;
+	border: 1%;
+	border-style: solid;
+	border-color: var(--dark-gray);
+	overflow: auto;
+	overflow-y: none;
+}
+
+.branch-table-link {
+	text-decoration: none;
+	color: var(--white);
+}
+
+.no-results-header {
+	color: var(--red);
+	text-align: center;
+}
