@@ -23,7 +23,7 @@
 
 **Create Button Tag (button)**  
 * **Options**  
-**type** - "", "button" or "reset"  
+**type** - "button", "reset" or ""  
 **class** - Element Class Name  
 **id** - Element ID Name  
 **value** - Button Value  
