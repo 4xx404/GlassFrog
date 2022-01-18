@@ -1,4 +1,0 @@
-pyngrok==5.0.2
-tld==0.11.11
-requests==2.25.1
-beautifulsoup4==4.9.3
