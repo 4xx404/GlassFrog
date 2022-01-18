@@ -13,12 +13,12 @@
 **href** - Link to direct to on element click  
 **placeholder** - The value displayed on the front end website  
 ```
-    $HTMLBuilder->CreateLinkElement(array(
-	    "class" => "example-element-class",
-    	"id" => "example-element-id",
-	    "href" => "https://www.example.com/",
-	    "placeholder" => "Visit Example Website"
-    ));
+	$HTMLBuilder->CreateLinkElement(array(
+		"class" => "example-element-class",
+		"id" => "example-element-id",
+		"href" => "https://www.example.com/",
+		"placeholder" => "Visit Example Website"
+	));
 ```  
 
 **Create Button Tag (button)**  
@@ -31,62 +31,62 @@
 **js_event** - "onclick", "onfocus" or "onfocusout"  
 **js_function** - JavaScript Function Name  
 ```
-    $HTMLBuilder->CreateButtonElement(array(
-        "type => "button"
-	    "class" => "example-element-class",
-    	"id" => "example-element-id",
-	    "value" => "Search",
-        "disabled" => "disabled",
-        "js_event" => "onclick",
-        "js_function" => "SayHi",
-	    "placeholder" => "Visit Example Website"
-    ));
+	$HTMLBuilder->CreateButtonElement(array(
+		"type => "button"
+		"class" => "example-element-class",
+		"id" => "example-element-id",
+		"value" => "Search",
+		"disabled" => "disabled",
+		"js_event" => "onclick",
+		"js_function" => "SayHi",
+		"placeholder" => "Visit Example Website"
+	));
 ```  
 
 **Create Div Tag (div)**  
 * **Options**  
 TBC
 ```
-    $HTMLBuilder->CreateDivElement(array(
-	    "class" => "example-element-class",
+	$HTMLBuilder->CreateDivElement(array(
+		"class" => "example-element-class",
     	"id" => "example-element-id",
-	    "href" => "https://www.example.com/",
-	    "placeholder" => "Visit Example Website"
-    ));
+		"href" => "https://www.example.com/",
+		"placeholder" => "Visit Example Website"
+	));
 ```  
 
 **Create Header Tags (h1-h6)**  
 * **Options**  
 TBC
 ```
-    $HTMLBuilder->CreateHeaderElement(array(
-	    "class" => "example-element-class",
-    	"id" => "example-element-id",
-	    "href" => "https://www.example.com/",
-	    "placeholder" => "Visit Example Website"
-    ));
+	$HTMLBuilder->CreateHeaderElement(array(
+		"class" => "example-element-class",
+		"id" => "example-element-id",
+		"href" => "https://www.example.com/",
+		"placeholder" => "Visit Example Website"
+	));
 ```  
 
 **Create Paragraph Tag (p)**  
 * **Options**  
 TBC
 ```
-    $HTMLBuilder->CreateParagraphElement(array(
-	    "class" => "example-element-class",
-    	"id" => "example-element-id",
-	    "href" => "https://www.example.com/",
-	    "placeholder" => "Visit Example Website"
-    ));
+	$HTMLBuilder->CreateParagraphElement(array(
+		"class" => "example-element-class",
+		"id" => "example-element-id",
+		"href" => "https://www.example.com/",
+		"placeholder" => "Visit Example Website"
+	));
 ```  
 
 **Create Image Tag (img)**  
 * **Options**  
 TBC
 ```
-    $HTMLBuilder->CreateImageElement(array(
-	    "class" => "example-element-class",
-    	"id" => "example-element-id",
-	    "href" => "https://www.example.com/",
-	    "placeholder" => "Visit Example Website"
-    ));
+	$HTMLBuilder->CreateImageElement(array(
+		"class" => "example-element-class",
+		"id" => "example-element-id",
+		"href" => "https://www.example.com/",
+		"placeholder" => "Visit Example Website"
+	));
 ```  
