@@ -1,20 +1,19 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-
-from datetime import datetime
 import sqlite3
-from sqlite3 import Error
 
 from .Styling.Banners import sd
 from .Styling.Colors import bc
 
 from .Config import CoreConfig
 from .Commands import Command
+from .Error import ErrorHandler
 
 class DBManager:
 	def __init__(self):
 		self.Config = CoreConfig()
 		self.Cmd = Command()
+		self.Error = ErrorHandler()
 
 		try:
 			self.Database = sqlite3.connect(self.Config.AbsoluteDatabasePath)
@@ -22,62 +21,6 @@ class DBManager:
 		except Exception:
 			self.Database = None
 			self.Cursor = None
-
-	def ThrowError(self, ErrorType: str, ErrorData: str or list = None):
-		self.ErrorType: str = ErrorType.lower() # Error Type to set Error Message
-		self.ErrorData: str = ErrorData # Data to pass into the Error Message
-
-		self.DefinedErrors = [
-			# Database Connection Error Tags
-			"database_connect_failed",
-
-			# CREATE Table Error Tags
-			"create_table_failed",
-			
-			# SQL Builder Error Tags
-			"invalid_build_statement_type",
-
-			# INSERT Error Tags
-			"undefined_table_insert",
-			"execute_insert_failed",
-
-			# SELECT Error Tags
-			"undefined_table_select",
-			"execute_select_failed",
-		]
-
-		# Defined Error Type
-		if(self.ErrorType in self.DefinedErrors):
-			# Database Connection Error Messages
-			if(self.ErrorType == "database_connect_failed"):
-				return f"{sd.eBan} Failed to connect to the Database {bc.RC}{self.ErrorData}{bc.BC}"
-
-			# CREATE Table Error Messages
-			elif(self.ErrorType == "create_table_failed"):
-				return f"{sd.eBan} Failed to create Database table {bc.RC}{self.ErrorData}{bc.BC}"
-
-			# SQL Builder Error Messages
-			elif(self.ErrorType == "invalid_build_statement_type"):
-				return f"{sd.eBan} Invalid Build SQL Statement Type {bc.RC}{self.ErrorData}{bc.BC}. Allowed Types: select, insert, update, delete"
-
-			# INSERT Error Messages
-			elif(self.ErrorType == "undefined_table_insert"):
-				return f"{sd.eBan} Failed to insert data into Database, undefined table name {bc.RC}{self.ErrorData}{bc.BC}"
-			elif(self.ErrorType == "execute_insert_failed"):
-				return f"{sd.eBan} Failed to insert data into Database table {bc.RC}{self.ErrorData}{bc.BC}"
-
-			# SELECT Error Messages
-			elif(self.ErrorType == "undefined_table_select"):
-				return f"{sd.eBan} Failed to select data from Database, undefined table name {bc.RC}{self.ErrorData}{bc.BC}"
-			elif(self.ErrorType == "execute_select_failed"):
-				return f"{sd.eBan} Failed to select data from Database table {bc.RC}{self.ErrorData}{bc.BC}"
-
-			# Undefined Error Message
-			else:
-				return f"{sd.eBan} Error Type {bc.RC}{self.ErrorType}{bc.BC} thrown without an error message defined"
-		# Undefined Error Type
-		else:
-			return f"{sd.eBan} Undefined Database Error Type {bc.RC}{self.ErrorType}{bc.BC}"
 	
 	def CreateTables(self):
 		# All Tables that should be created running setup.py
@@ -146,14 +89,14 @@ class DBManager:
 					else:
 						# Table does not exist & could not create table
 						self.Response["status"] = False
-						self.Response["errors"].append(self.ThrowError("create_table_failed", self.Table))
+						self.Response["errors"].append(self.Error.Throw("create_table_failed", self.Table))
 
 			for self.Tool in self.Config.WebsiteToolList:
 				self.Insert("website_tools", {"name": self.Tool})
 		else:
 			# No Database Connection
 			self.Response["status"] = False
-			self.Response["errors"].append(self.ThrowError("database_connect_failed", self.Config.AbsoluteDatabasePath))
+			self.Response["errors"].append(self.Error.Throw("database_connect_failed", self.Config.AbsoluteDatabasePath))
 
 		return self.Response
 
@@ -217,14 +160,14 @@ class DBManager:
 				except Exception as e:
 					# SQL Query execution failed
 					self.ResponsePack["status"], self.ResponsePack["rows"] = False, []
-					self.ResponsePack["error"] = self.ThrowError("execute_select_failed", f"{self.Table}\n{e}")
+					self.ResponsePack["error"] = self.Error.Throw("execute_select_failed", f"{self.Table}\n{e}")
 			else:
 				# Undefined Database Table
-				self.Cmd.Quit(self.ThrowError("undefined_table_select", self.Table))
+				self.Cmd.Quit(self.Error.Throw("undefined_table_select", self.Table))
 		else:
 			# No Database Connection
 			self.ResponsePack["status"] = False
-			self.ResponsePack["error"] = self.ThrowError("database_connect_failed", self.Config.AbsoluteDatabasePath)
+			self.ResponsePack["error"] = self.Error.Throw("database_connect_failed", self.Config.AbsoluteDatabasePath)
 
 		return self.ResponsePack
 
@@ -287,13 +230,13 @@ class DBManager:
 					# SQL Query execution failed
 					self.ResponsePack["status"] = False
 					self.ResponsePack["rows"] = []
-					self.ResponsePack["error"] = self.ThrowError("execute_insert_failed", f"{self.Table}\n{e}")
+					self.ResponsePack["error"] = self.Error.Throw("execute_insert_failed", f"{self.Table}\n{e}")
 			else:
 				# Undefined Database Table
-				self.Cmd.Quit(self.ThrowError("undefined_table_insert", self.Table))
+				self.Cmd.Quit(self.Error.Throw("undefined_table_insert", self.Table))
 		else:
 			# No Database Connection
 			self.ResponsePack["status"] = False
-			self.ResponsePack["error"] = self.ThrowError("database_connect_failed", self.Config.AbsoluteDatabasePath)
+			self.ResponsePack["error"] = self.Error.Throw("database_connect_failed", self.Config.AbsoluteDatabasePath)
 
 		return self.ResponsePack
