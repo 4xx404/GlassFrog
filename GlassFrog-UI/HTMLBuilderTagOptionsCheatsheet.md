@@ -7,7 +7,7 @@
 ```  
 
 **Create Anchor Tag (a)**  
-* Options  
+* **Options**  
 **class** - Element Class Name  
 **id** - Element ID Name  
 **href** - Link to direct to on element click  
@@ -22,7 +22,7 @@
 ```  
 
 **Create Button Tag (button)**  
-* Options  
+* **Options**  
 **type** - "", "button" or "reset"  
 **class** - Element Class Name  
 **id** - Element ID Name  
@@ -44,7 +44,7 @@
 ```  
 
 **Create Div Tag (div)**  
-* Options  
+* **Options**  
 TBC
 ```
     $HTMLBuilder->CreateDivElement(array(
@@ -56,7 +56,7 @@ TBC
 ```  
 
 **Create Header Tags (h1-h6)**  
-* Options  
+* **Options**  
 TBC
 ```
     $HTMLBuilder->CreateHeaderElement(array(
@@ -68,7 +68,7 @@ TBC
 ```  
 
 **Create Paragraph Tag (p)**  
-* Options  
+* **Options**  
 TBC
 ```
     $HTMLBuilder->CreateParagraphElement(array(
@@ -80,6 +80,7 @@ TBC
 ```  
 
 **Create Image Tag (img)**  
+* **Options**  
 TBC
 ```
     $HTMLBuilder->CreateImageElement(array(
