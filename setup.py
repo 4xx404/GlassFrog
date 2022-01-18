@@ -1,51 +1,90 @@
 #!/usr/bin/python3
+import sys, os, time
+sys.dont_write_bytecode = True
 
-import os, sys, time
+from Core.Styling.Banners import sd
+from Core.Styling.Colors import bc
 
-class bc:
-	GC = '\033[1;39m'
-	BC = '\033[1;34m'
-	RC = '\033[1;31m'
+from Core.Config import CoreConfig
+from Core.Commands import Command
+from Core.Database import DBManager
 
-iBan = bc.BC + " [" + bc.GC + "?" + bc.BC + "]"
-sBan = bc.BC + " [" + bc.GC + u'\u2713' + bc.BC + "]"
-eBan = bc.BC + " [" + bc.RC + u'\u2717' + bc.BC + "]"
+class SetupGlassFrog:
+	def __init__(self):
+		self.Config = CoreConfig()
+		self.Cmd = Command()
 
-author = bc.BC + "\n Author: " + bc.RC + "4" + bc.GC + "x" + bc.BC + "x" + bc.RC + "4" + bc.GC + "0" + bc.BC + "4\n"
-version = bc.BC + " Version: " + bc.RC + "2" + bc.GC + "." + bc.BC + "0\n"
-github = bc.BC + " Github: " + bc.RC + "h" + bc.GC + "t" + bc.BC + "t" + bc.RC + "p" + bc.GC + "s" + bc.BC + ":" + bc.RC + "/" + bc.GC + "/" + bc.BC + "g" + bc.RC + "i" + bc.GC + "t" + bc.BC + "h" + bc.RC + "u" + bc.GC + "b" + bc.BC + "." + bc.RC + "c" + bc.GC + "o" + bc.BC + "m" + bc.RC + "/" + bc.GC + "4" + bc.BC + "x" + bc.RC + "x" + bc.GC + "4" + bc.BC + "0" + bc.RC + "4\n"
+	def ThrowError(self, ErrorType: str, ErrorData: str or list = None):
+		self.ErrorType: str = ErrorType.lower()
+		self.ErrorData: str = ErrorData
 
-banner = bc.RC + '''
-''' + bc.GC + '''   ___  __      __    ___  ___  ____  ____  _____  ___     _   _   
-''' + bc.BC + '''  / __)(  )    /__\  / __)/ __)( ___)(  _ \(  _  )/ __)   (.)_(.)  
-''' + bc.RC + ''' ( (_-. )(__  /(__)\ \__ \\\__ \ )__)  )   / )(_)(( (_-.  (   _   ) 
-''' + bc.GC + '''  \___/(____)(__)(__)(___/(___/(__)  (_)\_)(_____)\___/  /`-----'\ 
-''' + author + version + github
+		self.DefinedErrors = [
+			"dependency_install_failed",
+			"ui_file_move_failed"
+		]
 
-os.system('clear')
-print(banner)
-
-def runSetup():
-	print(bc.BC + ' Running GlassFrog setup...\n Installing Dependencies...\n')
-	try:
-		os.system('python3 -m pip install -r modules/requirements.txt')
-	except Exception:
-		print(eBan + bc.RC + ' Failed to install dependencies\n')
-		quit()
+		if(self.ErrorType in self.DefinedErrors):
+			if(self.ErrorType == "dependency_install_failed"):
+				return f"{sd.eBan} Failed to install dependencies from {bc.RC}{self.ErrorData}{bc.BC}\n\n{sd.eBan} Setup failed"
+			elif(self.ErrorType == "ui_file_move_failed"):
+				return f"{sd.eBan} Failed to move {bc.RC}{self.ErrorData[0]}/{bc.BC} to {bc.RC}{self.ErrorData[1]}{bc.BC}\n\n{sd.eBan} Setup failed"
+			else:
+				return f"{sd.eBan} Error Type {bc.RC}{self.ErrorType}{bc.BC} thrown without an error message defined"
+		else:
+			return f"{sd.eBan} Undefined Error Type {bc.RC}{self.ErrorType}{bc.BC}"
 	
-	os.system('clear')
-	print(banner)
-	print(sBan + ' Dependencies Installed')
-	try:
-		os.system('mv GlassFrog-UI /var/www/html/')
-	except Exception:
-		print(eBan + ' Failed to move ' + bc.RC + 'GlassFrog-UI/' + bc.BC + ' to ' + bc.RC + '/var/www/html/')
-		print(eBan + ' Setup failed')
+	def DependencyInstall(self):
+		print(f"{bc.BC} Running GlassFrog setup...\n Installing Dependencies...\n")
+		if(self.Cmd.InstallPythonDependencies()):
+			print(f"{sd.sBan} Dependencies Installed")
+		else:
+			self.Cmd.Quit(self.ThrowError("dependency_install_failed", self.Config.RequirementsFilePath))
+	
+	def MoveUIFiles(self):
+		MovedOK = self.Cmd.MoveFile(self.Config.UIFilePath, self.Config.WebServerPath)
+		if(MovedOK == True):
+			print(f"{sd.sBan} Moved {bc.GC}{self.Config.UIFilePath}/{bc.BC} to {bc.GC}{self.Config.WebServerPath}{bc.BC}")
+		elif(MovedOK == None):
+			print(f"\n{sd.iBan.replace(' ERROR:', '')} {bc.GC}{self.Config.UIFilePath}/{bc.BC} has already been moved to {bc.GC}{self.Config.WebServerPath}{bc.BC}\n")
+		else:
+			self.Cmd.Quit(self.ThrowError("ui_file_move_failed", [self.Config.UIFilePath, self.Config.WebServerPath]))
+	
+	def CreateDatabaseTables(self):
+		self.Database = DBManager()
+		self.TableCreation = self.Database.CreateTables()
+
+		if(self.TableCreation["status"]):
+			for self.Table in self.TableCreation["data"]:
+				print(self.Table)
+			self.SetupStatus = f"{sd.sBan} Setup successful"
+		elif(self.TableCreation["status"] == None):
+			for self.Table in self.TableCreation["data"]:
+				print(self.Table)
+			self.SetupStatus = f"{sd.iBan} {self.Config.AppName} Setup has already been executed previously"
+		else:
+			for self.Error in self.TableCreation["errors"]:
+				print(self.Error)
+			self.SetupStatus = None
+
+		if(self.SetupStatus != None):
+			print(f"\n{self.SetupStatus}\n\n{sd.iBan} Run {self.Config.AppName}: {bc.GC}sudo python3 glassFrog.py{bc.BC}")
+			print(f"{sd.iBan} Run {self.Config.UIFilePath} Web Server: {bc.GC}sudo python3 server.py{bc.BC}")
+		else:
+			print(f"{sd.eBan} Setup failed")
+		
 		quit()
 
-	print(sBan + ' Moved ' + bc.GC + 'GlassFrog-UI/' + bc.BC + ' to ' + bc.GC + '/var/www/html/')
-	print(sBan + ' Setup successful')
-	quit()
+if(__name__ == '__main__'):
+	def Initiate():
+		Run = SetupGlassFrog()
 
-if __name__ == '__main__':
-	runSetup()
+		try:
+			Run.DependencyInstall()
+			Run.MoveUIFiles()
+			Run.CreateDatabaseTables()
+		except KeyboardInterrupt:
+			print(f"{bc.RC} Setup Aborted\n")
+			quit()
+
+	Command().Clear()
+	Initiate()
