@@ -12,7 +12,6 @@ from Core.Database import DBManager
 from Core.Validity import Validation
 from Core.Collector import CollectionManager
 from Core.Scanner import ContentScanner
-from server import GlassFrogServer
 
 class GlassFrog:
 	def __init__(self):
