@@ -27,41 +27,41 @@ class DBManager:
 		self.Tables = {
 			"branches": """CREATE TABLE branches(
 				id					INTEGER		PRIMARY KEY		AUTOINCREMENT	NOT NULL,
-				fld					TEXT										NOT NULL,
-				base_url			TEXT										NOT NULL,
-				branch_url			TEXT										NOT NULL,
-				branch_set_key		TEXT										NOT NULL,
-				keyword				TEXT										NOT NULL,
-				keyword_found		TEXT										NOT NULL,
-				branch_date			DATETIME,
+				fld					TEXT							NOT NULL,
+				base_url				TEXT							NOT NULL,
+				branch_url				TEXT							NOT NULL,
+				branch_set_key				TEXT							NOT NULL,
+				keyword					TEXT							NOT NULL,
+				keyword_found				TEXT							NOT NULL,
+				branch_date				DATETIME,
 				UNIQUE(branch_url)
 			);""",
 			
 			"branch_data": """CREATE TABLE branch_data(
 				id					INTEGER		PRIMARY KEY		AUTOINCREMENT	NOT NULL,
-				content_id			TEXT										NOT NULL,
-				datatype			TEXT										NOT NULL,
-				branch_url			TEXT										NOT NULL,
-				branch_set_key		TEXT										NOT NULL,
-				data				TEXT										NOT NULL,
-				data_date			DATETIME,
+				content_id				TEXT							NOT NULL,
+				datatype				TEXT							NOT NULL,
+				branch_url				TEXT							NOT NULL,
+				branch_set_key				TEXT							NOT NULL,
+				data					TEXT							NOT NULL,
+				data_date				DATETIME,
 				UNIQUE(data)
 			);""",
 
 			"portscanner_results": """CREATE TABLE portscanner_results(
 				id					INTEGER		PRIMARY KEY		AUTOINCREMENT	NOT NULL,
-				scan_id				TEXT										NOT NULL,
-				host				TEXT										NOT NULL,
-				port				TEXT										NOT NULL,
-				port_status			TEXT										NOT NULL,
-				port_service		TEXT										NOT NULL,
-				scan_date			DATETIME,
-				delete_date			DATETIME
+				scan_id					TEXT							NOT NULL,
+				host					TEXT							NOT NULL,
+				port					TEXT							NOT NULL,
+				port_status				TEXT							NOT NULL,
+				port_service				TEXT							NOT NULL,
+				scan_date				DATETIME,
+				delete_date				DATETIME
 			);""",
 			
 			"website_tools": """CREATE TABLE website_tools(
 				id					INTEGER		PRIMARY KEY		AUTOINCREMENT	NOT NULL,
-				name				TEXT										NOT NULL
+				name					TEXT							NOT NULL
 			);""",
 		}
 
