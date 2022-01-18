@@ -101,7 +101,7 @@ if(__name__ == "__main__"):
 
 			ShouldExtend = Frog.SetExtend()
 			if(ShouldExtend == "y"):
-				print(f"{sd.eBan} [{bc.GC} * * * {bc.BC}] EXTENDER COMING SOON! [{bc.GC} * * * {bc.BC}]\n")
+				print(f" [{bc.GC} * * * {bc.BC}] EXTENDER COMING SOON! [{bc.GC} * * * {bc.BC}]\n")
 
 				# Frog.StartSearch(Branches)
 			else:
