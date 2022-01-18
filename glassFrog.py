@@ -96,7 +96,7 @@ if(__name__ == "__main__"):
 			else:
 				quit()
 
-			# Remove any duplicated data from DataAnalysis/UNKNOWN_DATA_TYPE.txt
+			# Remove any duplicated data from DataAnalysis/UNKNOWN_TYPE_DATA.txt
 			Command().RemoveDuplicateFileContent(CoreConfig().UnknownDataAnalysisFilePath)
 
 			ShouldExtend = Frog.SetExtend()
