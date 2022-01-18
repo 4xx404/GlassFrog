@@ -1,44 +1,47 @@
-# GlassFrog  
+# GlassFrog v3.0  
 Link Crawling Keyword Search & Information Gathering Tool  
-  
-# How it works?  
-GlassFrog takes a Base_URL which it uses to collect all existing links on the Base_URL's webpage. While collecting links, it will check each link for the keyword & if exists will return a result. This is the 2nd version of GlassFrog, where the first version relied more on luck for gathering information such as emails or usernames, this version looks for different data types based on patterns in strings. GlassFrog will shift through various html tag types searching for information.  
 
-# Data Types it can find
-* Usernames/Handles (Such as twitter handles @username) [Accurate]
-* Email Addresses (Based on the base URL, it will find the Free Layer Domain & add it to a list(This helps to find business emails)) [Accurate]
-* Other Domains that are in text format, rather than in a link [Accurate]
-* Phone Numbers (This is a little tricky as each website can format their numbers slightly different. Alternatively it looks for 'tel:' type links) [Works Sometimes]
-* Bitcoin Addresses [Accurate]
-  
-# Usage  
-  
+# How GlassFrog Works  
+GlassFrog takes a Base URL which it uses to collect all existing links on the Base URL's webpage. While collecting links, it scans each page for the keyword & as well as searching for other data types based on patterns in strings. GlassFrog will shift through various html tag types searching for useful data.  
+
+# Requirements  
+All Python3 dependencies are in Core/requirements.txt & are automatically installed when running setup.
+**NOTE: GlassFrog uses the 'emojis' module which requires Python3.9**
+**If you see an import error with 'emojis' module, set your Python interpreter to Python3.9 & run setup** 
+
+# Collectable Data Types  
+* Usernames/Handles (Such as Twitter handles @username) [Accurate]  
+* Email Addresses (Based on the Base URL, it will get the URL's domain, create an email address from it & add it to a list(This helps to find business emails)). Alternatively, it looks for '**MailTo:**' type links [Accurate]  
+* Other Domains that are in text format, rather than as a link format [Accurate]  
+* Phone Numbers, which is a little more tricky as each website can format their numbers or display them differently. Alternatively it looks for '**tel:**' type links [Semi-Accurate]  
+* Bitcoin Addresses [Accurate]  
+
+# Install & Run  
 ```
-git clone https://github.com/4xx404/Glass-Frog && cd GlassFrog
-chmod +x setup.py && ./setup.py
+git clone https://github.com/4xx404/GlassFrog && cd GlassFrog
+sudo python3 setup.py
 python3 glassFrog.py
-```
+```  
 
-# Output Digest
-If the current line of output is [✓] Branch URL in GREEN then keyword has been found, otherwise it will show [✕] Branch URL in RED (Not Found).  
-Other data types will be displayed as, for example, [✓] EMAIL: Email Address
-  
-# Quickly view the whole database
-For Ease of Accessibility to the data collected, I have added a web interface which displays both tables. Everything is built into the server so you just need to open the ngrok link you are given. TIP: If your database is large, use CTRL + F in the browser to find something quickly.  
+# GlassFrog-UI Web Interface  
+For Ease of Accessibility, I have added a web interface which allows you to navigate through the collected data easily. Everything is built into the server so you just need to open the link you are given.
 ```
-python3 server.py
-```
-  
-# Modes (All will find data types automatically)  
-Version 1, which includes all modes without data recognition, can be found at https://github.com/Ns0ciety/Glass-Frog
-* Single Keyword Search
-* Multiple Keyword Search (This hasn't yet been built for v2. but will be)
-* Use Custom URL Files (This hasn't yet been built for v2, but will be)
-* Base URL Search or Extended onto External Links found (Extended hasn't yet been built for v2, but will be)
+sudo python3 server.py
+```  
 
-  
-# Uses  
+# Modes  
+Version 1, which includes all modes without data recognition, can be found [here](https://github.com/Ns0ciety/Glass-Frog). Version 1 will be deleted once each mode has been implemented into this version.  
+* Single Keyword Search  
+* Multiple Keyword Search (This hasn't yet been built for v3.)  
+* Use Custom URL Files (This hasn't yet been built for v3)  
+* Base URL Search or Extended onto External Links found (Extended hasn't yet been built for v3)  
+
+# Use Cases  
 GlassFrog can be used to find a lot of useful information such as various types of contact information, usernames, hidden directories, friends/associates etc. The search is a dynamic search dependent solely upon the links it is able to collect. For example, a large site will yield a lot more results than a small site as the link collection would collect more pages.  
-  
-# Data Type Requests  
-I am interested in introducing as many types as possible. If you have any suggestions for a type to add, feel free to contact me on Discord to discuss: 4xx404#3398  
+
+# Future Updates  
+GlassFrog has had a pretty big update both on the Python side as well as the Web Interface side. I have quite a few things planned for this tool going forward, including plenty more updates to the Web Interface. Some of the things to come are:  
+* Modes as listed above
+* Data Types (Hashes, Locations)  
+* More web based tools  
+* More features in the UI to bring better functionality (Search Boxes/Dropdown Menus, Database Manager(create, edit, delete))  
