@@ -151,7 +151,6 @@ class DBManager:
 					self.Rows = self.Cursor.fetchall()
 					for self.Row in self.Rows:
 						if(not self.Row[self.DataIndex] in self.ResponsePack["rows"]):
-#							print("DATABASE: " + self.Row[self.DataIndex])
 							self.ResponsePack["rows"].append(self.Row[self.DataIndex])
 						else:
 							continue
