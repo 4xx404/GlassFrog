@@ -12,6 +12,7 @@ from Core.Database import DBManager
 from Core.Validity import Validation
 from Core.Collector import CollectionManager
 from Core.Scanner import ContentScanner
+from Core.Error import ErrorHandler
 
 class GlassFrog:
 	def __init__(self):
@@ -20,6 +21,7 @@ class GlassFrog:
 		self.Database = DBManager()
 		self.Validator = Validation()
 		self.Collector = CollectionManager()
+		self.Error = ErrorHandler()
 
 	def PrintHelpMenu(self):
 		print(f"{sd.iBan} Include {bc.GC}http://{bc.BC} or {bc.GC}https://{bc.BC} in URL")
@@ -41,11 +43,11 @@ class GlassFrog:
 				return self.BaseURL
 			else:
 				self.Cmd.Clear()
-				print(f"{sd.eBan} Base URL must start with {bc.GC}http://{bc.BC} or {bc.GC}https://{bc.BC}\n")
+				print(self.Error.Throw("invalid_base_url_protocol"))
 				Initiate()
 		else:
 			self.Cmd.Clear()
-			print(f"{sd.eBan} Base URL value cannot be empty\n")
+			print(self.Error.Throw("empty_base_url"))
 			self.SetBaseURL()
 
 	def SetKeyword(self):
