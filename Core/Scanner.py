@@ -1,13 +1,11 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-from lib2to3.pytree import Base
 import sys, requests
 sys.dont_write_bytecode = True
 
 from .Styling.Banners import sd
 from .Styling.Colors import bc
 
-from sqlite3 import Error
 from bs4 import BeautifulSoup
 from tld import get_fld
 
@@ -17,6 +15,7 @@ from .Database import DBManager
 from .Validity import Validation
 from .Requester import RequestHandler
 from .BluePrint import BluePrinter
+from .Error import ErrorHandler
 
 class ContentScanner:
 	def __init__(self):
@@ -26,32 +25,11 @@ class ContentScanner:
 		self.Validator = Validation()
 		self.Request = RequestHandler()
 		self.BluePrint = BluePrinter()
+		self.Error = ErrorHandler()
 
 		self.DuplicateScanned = [] # Scanner.py
 		self.AnalysisDuplicates = [] # Scanner.py
 		self.NoPrint = [] # Scanner.py
-
-	def ThrowError(self, ErrorType: str, ErrorData: str or list = None):
-		self.ErrorType: str = ErrorType.lower() # Error Type to set Error Message
-		self.ErrorData: str = ErrorData # Data to pass into the Error Message
-
-		self.DefinedErrors = [
-			# Storage Error Tags
-			"storage_database_invalid_type",
-		]
-
-		# Defined Error Type
-		if(self.ErrorType in self.DefinedErrors):
-			#  Error Messages
-			if(self.ErrorType == "storage_database_invalid_type"):
-				return f"{sd.eBan} Storage Type {bc.RC}{self.ErrorData}{bc.BC} is invalid"
-
-			# Undefined Error Message
-			else:
-				return f"{sd.eBan} Error Type {bc.RC}{self.ErrorType}{bc.BC} thrown without an error message defined"
-		# Undefined Error Type
-		else:
-			return f"{sd.eBan} Undefined Database Error Type {bc.RC}{self.ErrorType}{bc.BC}"
 
 	def CreateBusinessEmailDomain(self, BranchLink: str):
 		self.BranchLink: str = BranchLink
@@ -88,7 +66,7 @@ class ContentScanner:
 					# Dont return an error because we can ignore this & continue onto the next piece of data in SearchData()
 					return False
 			else:
-				print(self.ThrowError("storage_textfile_invalid_type", self.StorageType))
+				print(self.Error.Throw("storage_textfile_invalid_type", self.StorageType))
 				return False
 		else:
 			if(self.StorageType == "database"):
@@ -119,7 +97,7 @@ class ContentScanner:
 					print(self.StorageResponse["error"])
 					return False
 			else:
-				print(self.ThrowError("storage_database_invalid_type", self.StorageType))
+				print(self.Error.Throw("storage_database_invalid_type", self.StorageType))
 				return False
 
 	def SearchData(self, BaseURL: str, BranchList: list, BranchSetKey: str):
