@@ -2,7 +2,7 @@
 Link Crawling Keyword Search & Information Gathering Tool  
 
 # How GlassFrog Works  
-GlassFrog takes a Base URL which it uses to collect all existing links on the Base URL's webpage. While collecting links, it scans each page for the keyword & as well as searching for other data types based on patterns in strings. GlassFrog will shift through various html tag types searching for useful data.  
+GlassFrog takes a Base URL which it uses to collect all existing links on the Base URL's webpage. While collecting links, it scans each page for the keyword & as well as searching for other data types based on patterns in strings. GlassFrog will shift through various predefined **HTML Tags** searching for useful data.  
 
 # Requirements  
 All Python3 dependencies are in Core/requirements.txt & are automatically installed when running setup.  
