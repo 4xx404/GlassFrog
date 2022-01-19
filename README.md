@@ -5,15 +5,18 @@ Link Crawling Keyword Search & Information Gathering Tool
 GlassFrog takes a Base URL which it uses to collect all existing links on the Base URL's webpage. While collecting links, it scans each page for the keyword & as well as searching for other data types based on patterns in strings. GlassFrog will shift through various html tag types searching for useful data.  
 
 # Requirements  
-All Python3 dependencies are in Core/requirements.txt & are automatically installed when running setup.
-**NOTE: GlassFrog uses the 'emojis' module which requires Python3.9**
-**If you see an import error with 'emojis' module, set your Python interpreter to Python3.9 & run setup** 
+All Python3 dependencies are in Core/requirements.txt & are automatically installed when running setup.  
+**NOTE: GlassFrog uses the 'emojis' module which requires Python3.9. If you see an import error with 'emojis' module, set your Python interpreter to Python3.9 & run setup.** 
 
 # Collectable Data Types  
-* Usernames/Handles (Such as Twitter handles @username) [Accurate]  
-* Email Addresses (Based on the Base URL, it will get the URL's domain, create an email address from it & add it to a list(This helps to find business emails)). Alternatively, it looks for '**MailTo:**' type links [Accurate]  
-* Other Domains that are in text format, rather than as a link format [Accurate]  
-* Phone Numbers, which is a little more tricky as each website can format their numbers or display them differently. Alternatively it looks for '**tel:**' type links [Semi-Accurate]  
+* Usernames/Handles  
+- Such as Twitter handles (@username) [Accurate]  
+* Email Addresses  
+- Based on the Base URL, it will get the URL's domain, create an email address from it & add it to a list(This helps to find business emails). Alternatively, it looks for '**MailTo:**' type links [Accurate]  
+* Other Domains  
+- Links that are in text format, rather than as a link format [Accurate]  
+* Phone Numbers  
+- Phone Numbers are a little more tricky as each website can format their numbers or display them differently. Alternatively it looks for '**tel:**' type links [Semi-Accurate]  
 * Bitcoin Addresses [Accurate]  
 
 # Install & Run  
@@ -32,7 +35,7 @@ sudo python3 server.py
 # Modes  
 Version 1, which includes all modes without data recognition, can be found [here](https://github.com/Ns0ciety/Glass-Frog). Version 1 will be deleted once each mode has been implemented into this version.  
 * Single Keyword Search  
-* Multiple Keyword Search (This hasn't yet been built for v3.)  
+* Multiple Keyword Search (This hasn't yet been built for v3)  
 * Use Custom URL Files (This hasn't yet been built for v3)  
 * Base URL Search or Extended onto External Links found (Extended hasn't yet been built for v3)  
 
