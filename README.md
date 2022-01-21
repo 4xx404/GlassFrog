@@ -9,15 +9,15 @@ All Python3 dependencies are in Core/requirements.txt & are automatically instal
 **NOTE: GlassFrog uses the 'emojis' module which requires Python3.9. If you see an import error with 'emojis' module, set your Python interpreter to Python3.9 & run setup.** 
 
 # Collectable Data Types  
-* Usernames/Handles  
-Such as Twitter handles (@username) [Accurate]  
-* Email Addresses  
-Based on the Base URL, it will get the URL's domain, create an email address from it & add it to a list(This helps to find business emails). Alternatively, it looks for '**MailTo:**' type links [Accurate]  
-* Other Domains  
+* **Usernames/Handles**  
+Such as Twitter handles (@username) [**Accurate**]  
+* **Email Addresses**  
+Based on the Base URL, it will get the URL's domain, create an email address from it & add it to a list(This helps to find business emails). Alternatively, it looks for '**MailTo:**' type links [**Accurate**]  
+* **Other Domains**  
 Links that are in text format, rather than as a link format [Accurate]  
-* Phone Numbers  
-Phone Numbers are a little more tricky as each website can format their numbers or display them differently. Alternatively it looks for '**tel:**' type links [Semi-Accurate]  
-* Bitcoin Addresses [Accurate]  
+* **Phone Numbers**  
+Phone Numbers are a little more tricky as each website can format their numbers or display them differently. Alternatively it looks for '**tel:**' type links [**Semi-Accurate**]  
+* **Bitcoin Addresses** [**Accurate**]  
 
 # Install & Run  
 ```
