@@ -14,7 +14,7 @@ Such as Twitter handles (@username) [**Accurate**]
 * **Email Addresses**  
 Based on the Base URL, it will get the URL's domain, create an email address from it & add it to a list(This helps to find business emails). Alternatively, it looks for '**MailTo:**' type links [**Accurate**]  
 * **Other Domains**  
-Links that are in text format, rather than as a link format [Accurate]  
+Links that are in text format, rather than as a link format [**Accurate**]  
 * **Phone Numbers**  
 Phone Numbers are a little more tricky as each website can format their numbers or display them differently. Alternatively it looks for '**tel:**' type links [**Semi-Accurate**]  
 * **Bitcoin Addresses** [**Accurate**]  
