@@ -1,17 +1,15 @@
 <?php
 	require_once("Core/init.php");
 
-    $Config = new Config();
-    $Database = new Database();
-    $HTMLBuilder = new HTMLBuilder();
-
+    $ToolName = null;
+    $PortScannerTarget = null;
     if(Input::Exists("get")) {
-        $ToolName = strtolower(Input::Get('tool'));
-        $PortScannerTarget = strtolower(Input::Get('website'));
+        $ToolName = (Input::Get("tool") !== null ? lowercase(Input::Get("tool")) : null);
+        $PortScannerTarget = (Input::Get("website") !== null ? lowercase(Input::Get("website")) : null);
     }
 ?>
 <!DOCTYPE html>
-<html lang="<?= $Config->Get("app_data/language"); ?>">
+<html lang="<?= Config::Get("AppData/Language"); ?>">
 <head>
 	<?php include("Includes/Generic/Header.php"); ?>
     <style>
@@ -20,7 +18,9 @@
 </head>
 <body>
     <div class="header" id="header">
-        <a class="logo" id="logo" href="GlassFrog.php"><?= $Config->Get("app_data/name") . " " . $Config->Get("app_data/version"); ?></a>
+        <a class="logo" id="logo" href="GlassFrog.php">
+            <?= Config::Get("AppData/Name") . " " . Config::Get("AppData/Version"); ?>
+        </a>
     </div>
 
 	<div class="left-panel" id="left-panel">
@@ -30,7 +30,7 @@
     </div>
 
     <?php
-        $AllowedTools = array('portscanner', 'whois', 'web-history');
+        $AllowedTools = array("portscanner", "whois", "web-history");
 
         if(!empty($ToolName)) {
             if(in_array($ToolName, $AllowedTools)) {

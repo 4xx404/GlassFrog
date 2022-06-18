@@ -1,11 +1,6 @@
-<?php
-    require_once("Core/init.php");
-    
-    $Config = new Config();
-    $Database = new Database();
-?>
+<?php require_once("Core/init.php"); ?>
 <!DOCTYPE html>
-<html lang="<?= $Config->Get("app_data/language"); ?>">
+<html lang="<?= Config::Get("AppData/Language"); ?>">
 <head>
 	<?php include("Includes/Generic/Header.php"); ?>
     <style>
@@ -14,7 +9,7 @@
 </head>
 <body>
     <div class="header" id="header">
-        <a class="logo" id="logo" href="GlassFrog.php"><?= $Config->Get("app_data/name") . " " . $Config->Get("app_data/version"); ?></a>
+        <a class="logo" id="logo" href="GlassFrog.php"><?= Config::Get("AppData/Name") . " " . Config::Get("AppData/Version"); ?></a>
     </div>
 
 	<div class="left-panel" id="left-panel">
@@ -26,7 +21,7 @@
 	<div class="branch-data-content" id="branch-data-content">
         <table class="branch-data-table" id="branch-data-table">
             <?php
-                $BranchDataList = $Database->SelectAll("branch_data");
+                $BranchDataList = (new Database())->SelectAll("branch_data");
 
                 if($BranchDataList) {
                     echo "
@@ -42,11 +37,11 @@
                     foreach($BranchDataList as $BranchData) {
                         echo "
                             <tr>
-                                <td class='standard-table-data'><a class='branch-data-table-link' href='" . $BranchData['branch_url'] . "'>" . $BranchData['branch_url'] . "</a></td>
-                                <td class='standard-table-data'>" . ucwords(str_replace('_', ' ', $BranchData['datatype'])) . "</td>
-                                <td class='standard-table-data'>" . $BranchData['data'] . "</td>
-                                <td class='standard-table-data'>" . explode(' ', $BranchData['data_date'])[0] . "</td>
-                                <td class='standard-table-data'>" . $BranchData['content_id'] . "</td>
+                                <td class='standard-table-data'><a class='branch-data-table-link' href='" . $BranchData["branch_url"] . "'>" . $BranchData["branch_url"] . "</a></td>
+                                <td class='standard-table-data'>" . ucwords(str_replace("_", " ", $BranchData["datatype"])) . "</td>
+                                <td class='standard-table-data'>" . $BranchData["data"] . "</td>
+                                <td class='standard-table-data'>" . explode(" ", $BranchData["data_date"])[0] . "</td>
+                                <td class='standard-table-data'>" . $BranchData["content_id"] . "</td>
                             </tr>
                         ";
                     }

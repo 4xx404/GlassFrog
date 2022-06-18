@@ -1,17 +1,25 @@
 <?php
-$GLOBALS["config"] = array(
-	"app_data" => array(
-		"name" => "GlassFrog",
-		"version" => "3.0",
-		"language" => "en",
-		"favicon" => "Favicon.png"
+$GLOBALS["Config"] = array(
+	"AppData" => array(
+		"Name" => "GlassFrog",
+		"Version" => "3.0",
+		"Language" => "en",
+		"Favicon" => "Favicon.png"
 	),
 
-	"sqlite" => array(
-		"path" => "db/GlassFrog.db",
+	"Sqlite" => array(
+		"Path" => "db/GlassFrog.db",
 	),
+
+	"Functions" => array(
+		"Strings",
+	)
 );
 
-spl_autoload_register(function ($class) {
-	require_once "Classes/" . $class . ".php";
+spl_autoload_register(function ($Class) {
+	require_once("Classes/{$Class}.php");
 });
+
+foreach($GLOBALS["Config"]["Functions"] as $Function) {
+	require_once("Functions/" . ucfirst($Function) . ".php");
+} 

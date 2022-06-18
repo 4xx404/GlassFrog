@@ -1,27 +1,14 @@
 <?php
 class Input {
-	public static function Exists($type = "post") {
-		switch($type) {
-			case "post":
-				return !empty($_POST) ? true : false;
-				break;
-			case "get":
-				return !empty($_GET) ? true : false;
-				break;
-				
-			default:
-				return false;
-				break;
-		}
+	public static function Exists($Type = "post"): bool {
+		return (($Type === "post" && !empty($_POST)) ? true : (($Type === "get" && !empty($_GET)) ? true : false));
 	}
 	
-	public static function Get($item) {
-		if(isset($_POST[$item])) {
-			return $_POST[$item];
-		} else if(isset($_GET[$item])) {
-			return $_GET[$item];
-		}
+	public static function Get(string $Item = null): mixed {
+		return (($Item !== null) ? ((isset($_POST[$Item])) ? $_POST[$Item] : ((isset($_GET[$Item])) ? $_GET[$Item] : "")) : "");
+	}
 
-		return '';
+	public static function Raw(): array|null {
+		return ((isset($_POST)) ? $_POST : ((isset($_GET)) ? $_GET : null));
 	}
 }

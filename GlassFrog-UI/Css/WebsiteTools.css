@@ -32,6 +32,8 @@
     width: 60%;
     height: 25rem;
     background: none;
+	color: red;
+	font-weight: bold;
     border: none;
 }
 

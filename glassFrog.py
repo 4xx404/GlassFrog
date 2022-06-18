@@ -33,6 +33,7 @@ class GlassFrog:
 	def SetBaseURL(self):
 		self.PrintHelpMenu()
 		self.BaseURL = str(input(f"{bc.BC} Base URL: {bc.GC}"))
+
 		if(self.Validator.NotEmpty(self.BaseURL)):
 			if(self.BaseURL.endswith("/")):
 				self.BaseURL = self.BaseURL

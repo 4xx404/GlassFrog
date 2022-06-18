@@ -1,26 +1,21 @@
 
 <?php
-
-/*
- * USAGE EXAMPLE: Config::get('mysqli/host');
- * 'mysqli/host' path found in core/init.php
-*/
- 
 class Config {
-	public function Get($path = null) {
-		if($path) {
-			$config = $GLOBALS["config"];
-			$path = explode("/", $path);
+	public static function Get($Path = null) {
+		if($Path) {
+			$Config = $GLOBALS["Config"];
+			$Path = explode("/", $Path);
 
-			foreach($path as $bit) {
-				if(isset($config[$bit])) {
-					$config = $config[$bit];
+			foreach($Path as $Bit) {
+				if(isset($Config[$Bit])) {
+					$Config = $Config[$Bit];
 				}
 			}
 			
-			return $config;
+			return $Config;
 		}
 		
 		return false;
 	}
 }
+?>

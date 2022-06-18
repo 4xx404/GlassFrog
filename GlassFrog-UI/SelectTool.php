@@ -1,19 +1,17 @@
 <?php
 	require_once("Core/init.php");
 
-    $Config = new Config();
     $Database = new Database();
-    $Redirect = new Redirect();
 
     if(Input::Exists()) {
         $ToolName = strtolower(Input::Get("tool"));
         $WebsiteLink = Input::Get("website-link");
 
-        $Redirect->To("WebsiteTools.php?tool=" . $ToolName . "&website=" . $WebsiteLink);
+        Redirect::To("WebsiteTools.php?tool={$ToolName}&website={$WebsiteLink}");
     }
 ?>
 <!DOCTYPE html>
-<html lang="<?= $Config->Get("app_data/language"); ?>">
+<html lang="<?= Config::Get("AppData/Language"); ?>">
 <head>
 	<?php include("Includes/Generic/Header.php"); ?>
     <style>
@@ -22,7 +20,7 @@
 </head>
 <body onload="SetFormHeader();">
     <div class="header" id="header">
-        <a class="logo" id="logo" href="GlassFrog.php"><?= $Config->Get("app_data/name") . " " . $Config->Get("app_data/version"); ?></a>
+        <a class="logo" id="logo" href="GlassFrog.php"><?= Config::Get("AppData/Name") . " " . Config::Get("AppData/Version"); ?></a>
     </div>
 
 	<div class="left-panel" id="left-panel">
@@ -36,31 +34,35 @@
             <h3 class="form-header" id="form-header"></h3>
 
             <?php
+                $Websites = null;
+
                 $ToolList = $Database->SelectAll("website_tools");
-                $Websites = $Database->SelectAll("branches");
                 if($ToolList) {
-                    echo "
-                        <div class='form-field-input' id='form-field-input'>                    
-                            <label for='tool' class='select-input-label'>Select Tool</label>
-                            <select class='tool-selector-input' name='tool' id='tool' onchange='SetFormHeader();'>";
-                                foreach($ToolList as $Tool) {
-                                    echo "<option value='" . $Tool["name"] . "'>" . ucwords(str_replace("_", " ", $Tool["name"])) . "</option>";
-                                }
-                    echo "  
-                            </select>
-                        </div>";
+                    $Websites = $Database->SelectAll("branches");
+
+                    if($Websites !== null) {
+                        echo "
+                            <div class='form-field-input' id='form-field-input'>                    
+                                <label for='tool' class='select-input-label'>Select Tool</label>
+                                <select class='tool-selector-input' name='tool' id='tool' onchange='SetFormHeader();'>";
+                                    foreach($ToolList as $Tool) {
+                                        echo "<option value='" . $Tool["name"] . "'>" . ucwords(str_replace("_", " ", $Tool["name"])) . "</option>";
+                                    }
+                        echo "  
+                                </select>
+                            </div>";
+                    }
                 } else {
                     echo "
                         <tr>
                             <th class='red-font-table-head'>Failed to collect tools</th>
                         </tr>
                     ";
-
-                    $Websites = false;
                 }
-
-                if($Websites) {
+                
+                if($Websites !== null) {
                     $DuplicateWebsites = [];
+                    
                     echo "
                         <div class='form-field-input' id='form-field-input'>
                             <label for='website-link' class='select-input-label'>Select Website</label>

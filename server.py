@@ -17,6 +17,7 @@ class GlassFrogServer:
 
 	def CreateProcess(self):
 		print(f"\n{sd.iBan} Press {bc.GC}CTRL + C{bc.BC} to stop the server\n")
+
 		if(self.Cmd.ChangeDirectory(self.Config.WebServerPath)):
 			try:
 				subprocess.call(["php", "-S", f"{self.Config.ServerHost}:{self.Config.ServerPort}"])
@@ -29,7 +30,7 @@ class GlassFrogServer:
 			print(self.Error.Throw("change_directory_failed", self.Config.WebServerPath))
 			quit()
 
-if(__name__ == '__main__'):
+if(__name__ == "__main__"):
 	def Initiate():
 		Server = GlassFrogServer()
 

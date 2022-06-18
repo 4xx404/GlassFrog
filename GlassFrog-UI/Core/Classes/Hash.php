@@ -1,35 +1,18 @@
 <?php
 class Hash {
-	public function MakeBcrypt($String) {
-		$Options = ['cost' => 12];
-
-		/* Create the hash. */
-		return password_hash($String, PASSWORD_DEFAULT, $Options); // 2020 JJUNE DEFAULT: bcrypt
+	public static function Bcrypt(string $String = null): string|false {
+		// Password standard, cannot create with uniqid() like md5
+		return (($String !== null) ? password_hash($String, PASSWORD_DEFAULT, ["cost" => 12]) : "");
 	}
 
-	public function MakeMD5($String) {
-		return md5($String);
+	public static function MD5(string $String = null): string {
+		return md5(($String !== null) ? $String : uniqid());
 	}
 
-	public function Unique($HashType = null, $String = null) {
-		if($HashType !== null) {
-			if(strtolower($HashType) === "md5" || strtolower($HashType) === "bcrypt") {
-				if(strtolower($HashType === "md5" && $String !== null)) {
-					return $this->MakeMD5($String);
-				} else if(strtolower($HashType) === "md5" && $String === null) {
-					return $this->MakeMD5(uniqid());
-				} else if(strtolower($HashType) === "bcrypt" && $String !== null) {
-					return $this->MakeBcrypt($String);
-				} else if(strtolower($HashType) === "bcrypt" && $String === null) {
-					return $this->MakeBcrypt(uniqid());
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-		}
-		
-		return false;
+	public static function Make(string $HashType = null, string $String = null): string {
+		$HashType = (($HashType !== null) ? lowercase($HashType) : "md5");
+		$String = (($String !== null) ? $String : uniqid());
+
+		return (($HashType === "md5") ? self::MD5($String) : (($HashType === "bcrypt") ? self::Bcrypt($String) : ""));
 	}
 }

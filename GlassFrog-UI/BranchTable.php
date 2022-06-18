@@ -1,11 +1,6 @@
-<?php
-	require_once("Core/init.php");
-
-    $Config = new Config();
-    $Database = new Database();
-?>
+<?php require_once("Core/init.php"); ?>
 <!DOCTYPE html>
-<html lang="<?= $Config->Get("app_data/language"); ?>">
+<html lang="<?= Config::Get("AppData/Language"); ?>">
 <head>
 	<?php include("Includes/Generic/Header.php"); ?>
     <style>
@@ -14,7 +9,7 @@
 </head>
 <body>
     <div class="header" id="header">
-        <a class="logo" id="logo" href="GlassFrog.php"><?= $Config->Get("app_data/name") . " " . $Config->Get("app_data/version"); ?></a>
+        <a class="logo" id="logo" href="GlassFrog.php"><?= Config::Get("AppData/Name") . " " . Config::Get("AppData/Version"); ?></a>
     </div>
 
     <div class="left-panel" id="left-panel">
@@ -26,7 +21,7 @@
     <div class="branch-content" id="branch-content">
         <table class="branch-table" id="branch-table">
             <?php
-                $Branches = $Database->SelectAll("branches");
+                $Branches = (new Database())->SelectAll("branches");
 
                 if($Branches) {
                     echo "
@@ -42,17 +37,11 @@
                     foreach($Branches as $Branch) {
                         echo "
                             <tr>
-                                <td class='standard-table-data'><a class='branch-table-link' href='" . $Branch['base_url'] . "'>" . $Branch["base_url"] . "</a></td>
-                                <td class='standard-table-data'><a class='branch-table-link' href='" . $Branch['branch_url'] ."'>" . $Branch["branch_url"] . "</a></td>
-                                <td class='standard-table-data'>" . $Branch['keyword'] . "</td>";
-
-                                if($Branch['keyword_found'] === 'True') {
-                                    echo "<td class='green-font-table-data'>" . $Branch['keyword_found'] . "</td>";
-                                } else { 
-                                    echo "<td class='red-font-table-data'>" . $Branch['keyword_found'] . "</td>";
-                                }
-
-                                echo "<td class='standard-table-data'>". $Branch['branch_set_key'] . "</td>
+                                <td class='standard-table-data'><a class='branch-table-link' href='" . $Branch["base_url"] . "'>" . $Branch["base_url"] . "</a></td>
+                                <td class='standard-table-data'><a class='branch-table-link' href='" . $Branch["branch_url"] ."'>" . $Branch["branch_url"] . "</a></td>
+                                <td class='standard-table-data'>" . $Branch["keyword"] . "</td>
+                                <td class='" . ((lowercase($Branch["keyword_found"]) === "true") ? "green-" : "red-") . "font-table-data'>" . $Branch["keyword_found"] . "</td>
+                                <td class='standard-table-data'>". $Branch["branch_set_key"] . "</td>
                             </tr>
                         ";
                     }

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import sys, os, time
+import sys
 sys.dont_write_bytecode = True
 
 from Core.Styling.Banners import sd
@@ -18,6 +18,7 @@ class SetupGlassFrog:
 
 	def DependencyInstall(self):
 		print(f"{bc.BC} Running GlassFrog setup...\n Installing Dependencies...\n")
+		
 		if(self.Cmd.InstallPythonDependencies()):
 			print(f"{sd.sBan} Dependencies Installed")
 		else:
@@ -25,6 +26,7 @@ class SetupGlassFrog:
 	
 	def MoveUIFiles(self):
 		MovedOK = self.Cmd.MoveFile(self.Config.UIFilePath, self.Config.WebServerPath)
+
 		if(MovedOK == True):
 			print(f"{sd.sBan} Moved {bc.GC}{self.Config.UIFilePath}/{bc.BC} to {bc.GC}{self.Config.WebServerPath}{bc.BC}")
 		elif(MovedOK == None):
@@ -57,7 +59,7 @@ class SetupGlassFrog:
 		
 		quit()
 
-if(__name__ == '__main__'):
+if(__name__ == "__main__"):
 	def Initiate():
 		Run = SetupGlassFrog()
 

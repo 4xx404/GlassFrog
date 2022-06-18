@@ -1,12 +1,8 @@
 <?php
 
 class Analytics {
-    public function __construct() {
-        $this->Validator = new Validate();
-    }
-
-    function GetIPAddress($Link) {
-        return !empty(gethostbyname($Link)) ? gethostbyname($Link) : '';
+    function GetIPAddress(string $Link = null): string {
+        return (($Link !== null && !empty(gethostbyname($Link))) ? gethostbyname($Link) : "");
     }
 }
 ?>
