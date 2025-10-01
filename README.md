@@ -48,3 +48,6 @@ GlassFrog has had a pretty big update both on the Python side as well as the Web
 * Data Types (Hashes, Locations)  
 * More web based tools  
 * More features in the UI to bring better functionality (Search Boxes/Dropdown Menus, Database Manager(create, edit, delete))  
+
+### Disclaimer  
+See [GlassFrog Disclaimer](https://github.com/4xx404/GlassFrog/blob/main/DISCLAIMER.md)
